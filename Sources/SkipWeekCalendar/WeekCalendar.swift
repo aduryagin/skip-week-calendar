@@ -26,20 +26,20 @@ public struct WeekCalendar<Content: View>: View {
         self.content = content
     }
 
-    public var body: some View {
-        #if SKIP
-        ComposeView { ctx in
-            WeekCalendarStripAndroid { isSelected, isToday, date, onTap in
-                content(
-                    isSelected: isSelected,
-                    isToday: isToday,
-                    date: Date(platformValue: date),
-                    onTap: onTap
-                ).Compose(context: ctx.content())
-            }
+    #if SKIP
+    @Composable public override func ComposeContent(context: ComposeContext) {
+        WeekCalendarAndroid { isSelected, isToday, date, onTap in
+            content(
+                isSelected,
+                isToday,
+                Date(platformValue: date),
+                onTap
+            ).Compose(context: context.content())
         }
-        #else
-        WeekCalendarStrip(content: content)
-        #endif
     }
+    #else
+    public var body: some View {
+        WeekCalendarStrip(content: content)
+    }
+    #endif
 }
