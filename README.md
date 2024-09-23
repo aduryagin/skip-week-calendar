@@ -1,5 +1,7 @@
 # SkipWeekCalendar
 
+![Preview](./preview.gif)
+
 ## Installing
 
 Add the dependency inside the dependencies section in Package.swift
