@@ -28,6 +28,24 @@
       }
     },
     {
+      "identity" : "skip-model",
+      "kind" : "remoteSourceControl",
+      "location" : "https://source.skip.tools/skip-model.git",
+      "state" : {
+        "revision" : "d0a9611595d72040c7870261c909679bc08afd1d",
+        "version" : "1.2.0"
+      }
+    },
+    {
+      "identity" : "skip-ui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://source.skip.tools/skip-ui.git",
+      "state" : {
+        "revision" : "58e0fc7318f1e8e361aa7093e29b188698d76841",
+        "version" : "1.11.2"
+      }
+    },
+    {
       "identity" : "skip-unit",
       "kind" : "remoteSourceControl",
       "location" : "https://source.skip.tools/skip-unit.git",

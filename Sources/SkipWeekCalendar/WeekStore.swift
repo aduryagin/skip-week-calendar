@@ -8,7 +8,9 @@
 
 #if !SKIP
 import Foundation
+#if os(iOS)
 import UIKit
+#endif
 import SwiftUI
 
 struct Week {
@@ -46,6 +48,7 @@ class WeekStore: ObservableObject {
             weeks = await calcWeeks(with: selectedDate)
         }
 
+        #if os(iOS)
         // Set up the observer for the significant time change notification
         NotificationCenter.default.addObserver(
             self,
@@ -53,6 +56,7 @@ class WeekStore: ObservableObject {
             name: UIApplication.significantTimeChangeNotification,
             object: nil
         )
+        #endif
     }
 
     deinit {

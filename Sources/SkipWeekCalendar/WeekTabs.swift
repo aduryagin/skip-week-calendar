@@ -43,7 +43,9 @@ struct WeekTabs<Content: View>: View {
                     .tag(2)
             }
         }
+        #if os(iOS)
         .tabViewStyle(.page(indexDisplayMode: .never))
+        #endif
         .onChange(of: weekStore.activeTab) { value in
             if value == 0 {
                 direction = .past
