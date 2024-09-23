@@ -2,7 +2,7 @@
 
 ![Preview](./preview.gif)
 
-## Installing
+## Installation
 
 Add the dependency inside the dependencies section in Package.swift
 ```swift
