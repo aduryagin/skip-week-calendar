@@ -1,0 +1,6 @@
+build:
+  contents:
+    - block: 'dependencies'
+      contents:
+        - 'implementation("com.kizitonwose.calendar:view:2.6.0")'
+        - 'implementation("com.kizitonwose.calendar:compose:2.6.0")'
