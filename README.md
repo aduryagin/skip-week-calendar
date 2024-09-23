@@ -4,10 +4,24 @@
 
 ## Installation
 
-Add the dependency inside the dependencies section in Package.swift
+Update Package.swift
 ```swift
-.package(url: "https://github.com/aduryagin/skip-week-calendar.git", branch: "main")
+dependencies: [
+    // Other dependencies here
+    .package(url: "https://github.com/aduryagin/skip-week-calendar.git", branch: "main")
+],
+targets: [
+    .target(
+        name: "YourProjectName",
+        dependencies: [
+            // List your target dependencies here, including the new package
+            .product(name: "SkipWeekCalendar", package: "skip-week-calendar")
+        ]
+    ),
+]
 ```
+
+Add 
 
 ## Usage
 
