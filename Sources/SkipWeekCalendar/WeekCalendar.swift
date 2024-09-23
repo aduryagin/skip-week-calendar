@@ -9,20 +9,20 @@
 import SwiftUI
 
 public struct WeekCalendar<Content: View>: View {
-    
-    public let content: (
+    public typealias ContentClosure = (
         _ isSelected: Bool,
         _ isToday: Bool,
         _ date: Date,
         _ onTap: @escaping () -> Void
     ) -> Content
+
+    #if !SKIP
+    @StateObject private var weekStore: WeekStore = WeekStore()
+    #endif
     
-    public init(@ViewBuilder content: @escaping (
-        _ isSelected: Bool,
-        _ isToday: Bool,
-        _ date: Date,
-        _ onTap: @escaping () -> Void
-    ) -> Content) {
+    public let content: ContentClosure
+    
+    public init(@ViewBuilder content: @escaping ContentClosure) {
         self.content = content
     }
 
@@ -39,7 +39,13 @@ public struct WeekCalendar<Content: View>: View {
     }
     #else
     public var body: some View {
-        WeekCalendarStrip(content: content)
+        WeekTabs() { week in
+            WeekView(
+                week: week,
+                content: content
+            )
+        }
+        .environmentObject(weekStore)
     }
     #endif
 }
