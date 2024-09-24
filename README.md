@@ -21,8 +21,6 @@ targets: [
 ]
 ```
 
-Add 
-
 ## Usage
 
 ```swift
