@@ -40,7 +40,7 @@ fun WeekCalendarAndroid(
     val state = rememberWeekCalendarState(
         startDate = startDate,
         endDate = endDate,
-        firstVisibleWeekDate = currentDate,
+        firstVisibleWeekDate = selectedDay,
         firstDayOfWeek = firstDayOfWeek
     )
 
