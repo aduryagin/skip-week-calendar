@@ -35,7 +35,7 @@ fun WeekCalendarAndroid(
 
     WeekCalendar(
         state = state,
-        contentPadding = androidx.compose.foundation.layout.PaddingValues(9.dp),
+        contentPadding = androidx.compose.foundation.layout.PaddingValues(start = 15.dp, end = 15.dp),
         dayContent = {
             content(
                 it.date == selectedDay,
