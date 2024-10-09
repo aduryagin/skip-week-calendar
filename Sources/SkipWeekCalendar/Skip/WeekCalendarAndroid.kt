@@ -14,9 +14,11 @@ import java.time.LocalDate
 import java.time.YearMonth
 import java.time.ZoneId
 import java.util.Date
+import androidx.compose.runtime.LaunchedEffect
 
 @Composable
 fun WeekCalendarAndroid(
+	selection: Date?,
     content: @Composable (isSelected: Boolean, isToday: Boolean, date: Date, onTap: () -> Unit) -> Unit
 ) {
     val currentDate = remember { LocalDate.now() }
@@ -24,7 +26,16 @@ fun WeekCalendarAndroid(
     val startDate = remember { currentMonth.minusMonths(100).atStartOfMonth() }
     val endDate = remember { currentMonth.plusMonths(100).atEndOfMonth() }
     val firstDayOfWeek = remember { firstDayOfWeekFromLocale() }
-    var selectedDay by remember { mutableStateOf(currentDate) }
+
+    var selectedDay by remember { mutableStateOf(
+		selection?.toInstant()?.atZone(ZoneId.systemDefault())?.toLocalDate() ?: currentDate
+	) }
+
+	LaunchedEffect(selection) {
+		selection?.let {
+			selectedDay = it.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+		}
+	}
 
     val state = rememberWeekCalendarState(
         startDate = startDate,

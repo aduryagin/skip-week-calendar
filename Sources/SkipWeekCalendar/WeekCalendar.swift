@@ -19,16 +19,27 @@ public struct WeekCalendar<Content: View>: View {
     #if !SKIP
     @StateObject private var weekStore: WeekStore = WeekStore()
     #endif
+
+    @Binding private var selection: Date
     
     public let content: ContentClosure
     
-    public init(@ViewBuilder content: @escaping ContentClosure) {
+    
+    public init(
+        selection: Binding<Date>? = nil,
+        @ViewBuilder content: @escaping ContentClosure
+    ) {
         self.content = content
+        #if !SKIP
+        self._selection = selection ?? .constant(Date.now)
+        #else
+        self.selection = selection?.wrappedValue ?? Date.now
+        #endif
     }
-
+    
     #if SKIP
     @Composable public override func ComposeContent(context: ComposeContext) {
-        WeekCalendarAndroid { isSelected, isToday, date, onTap in
+        WeekCalendarAndroid(selection: selection.kotlin()) { isSelected, isToday, date, onTap in
             content(
                 isSelected,
                 isToday,
@@ -46,6 +57,9 @@ public struct WeekCalendar<Content: View>: View {
             )
         }
         .environmentObject(weekStore)
+        .task(id: selection) {
+            weekStore.select(date: selection)
+        }
     }
     #endif
 }

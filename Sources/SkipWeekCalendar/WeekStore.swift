@@ -40,8 +40,8 @@ class WeekStore: ObservableObject {
     }
     @Published var activeDate = Date().start()
   
-    init(with date: Date = Date()) {
-        self.selectedDate = Calendar.current.startOfDay(for: date)
+    init(with date: Date? = nil) {
+        self.selectedDate = Calendar.current.startOfDay(for: date ?? Date.now)
         self.activeDate = self.selectedDate
         
         Task {
