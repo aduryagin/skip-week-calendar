@@ -8,6 +8,47 @@
 
 import SwiftUI
 
+struct DayTextView: View {
+    var date: Date
+    
+    var body: some View {
+        Text(
+            date.toString(
+                format: "d"
+            )
+        )
+        .font(
+            Font.system(
+                size: 15
+            )
+        )
+        .frame(
+            maxWidth: CGFloat.infinity
+        )
+    }
+}
+
+struct WeekDayTextView: View {
+    var date: Date
+    
+    var body: some View {
+        Text(
+            date.toString(
+                format: "EEE"
+            ).uppercased()
+        )
+        .font(
+            Font.system(
+                size: 15
+            )
+        )
+        .fontWeight(Font.Weight.semibold)
+        .frame(
+            maxWidth: CGFloat.infinity
+        )
+    }
+}
+
 public struct WeekDayView: View {
     let isSelected: Bool
     let isToday: Bool
@@ -32,41 +73,21 @@ public struct WeekDayView: View {
         let borderColor = getBorderAccentColor()
         
         VStack(spacing: 3) {
-            Text(
-                date.toString(
-                    format: "EEE"
-                ).uppercased()
-            )
-            .font(
-                Font.system(
-                    size: 15
-                )
-            )
-            .foregroundColor(
-                isSelected ? Color.accentColor : Color.gray
-            )
-            .fontWeight(Font.Weight.semibold)
-            .frame(
-                maxWidth: CGFloat.infinity
-            )
+            if (isSelected) {
+                WeekDayTextView(date: date)
+                    .foregroundColor(Color.accentColor)
+            } else {
+                WeekDayTextView(date: date)
+            }
             
-            Text(
-                date.toString(
-                    format: "d"
-                )
-            )
-            .font(
-                Font.system(
-                    size: 15
-                )
-            )
-            .frame(
-                maxWidth: CGFloat.infinity
-            )
-            .foregroundColor(
-                isSelected ? Color.accentColor : Color.gray
-            )
-            .fontWeight(isSelected ? Font.Weight.semibold : Font.Weight.regular)
+            if (isSelected) {
+                DayTextView(date: date)
+                    .foregroundColor(Color.accentColor)
+                    .fontWeight(Font.Weight.semibold)
+            } else {
+                DayTextView(date: date)
+                    .fontWeight(Font.Weight.regular)
+            }
         }
         .padding(EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0))
         .cornerRadius(10)
