@@ -16,10 +16,9 @@ let package = Package(
             targets: ["SkipWeekCalendar"])
     ],
     dependencies: [
-        .package(url: "https://source.skip.tools/skip.git", from: "1.1.3"),
-        .package(url: "https://source.skip.tools/skip-ui.git", from: "1.11.2"),
-        .package(
-            url: "https://source.skip.tools/skip-foundation.git", from: "1.0.0"),
+        .package(url: "https://source.skip.tools/skip.git", from: "1.1.12"),
+        .package(url: "https://source.skip.tools/skip-ui.git", from: "1.13.3"),
+        .package(url: "https://source.skip.tools/skip-foundation.git", from: "1.1.12"),
     ],
     targets: [
         .target(
